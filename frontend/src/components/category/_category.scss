@@ -1,0 +1,26 @@
+.cp-category {
+
+    .selected {
+        cursor: default !important;
+        outline: none !important;
+        border-color: $color-outrageous-orange !important;
+        box-shadow: 0 0 10px $color-outrageous-orange !important;
+    }
+
+    .card {
+        height: 100px;
+        border: 1px solid $color-blue-bayoux;
+        padding: 10px;
+        margin: 10px;
+        text-align: center;
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        border-radius: 2px;
+        background-color: $color-oxford-blue;
+
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0 0px 0px $color-outrageous-orange, 0 0px 0px $color-outrageous-orange;
+        }
+    }
+}

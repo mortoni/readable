@@ -1,0 +1,48 @@
+.cp-modal {
+    .selected {
+        cursor: default !important;
+        outline: none !important;
+        border-color: $color-outrageous-orange !important;
+        box-shadow: 0 0 10px $color-outrageous-orange !important;
+    }
+
+    .card {
+        height: 80px;
+        border: 1px solid $color-blue-bayoux;
+        text-align: center;
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        border-radius: 2px;
+        background-color: $color-oxford-blue;
+
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0 0px 0px $color-outrageous-orange, 0 0px 0px $color-outrageous-orange;
+        }
+    }
+
+    .button {
+        text-align: center;
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        border-radius: 2px;
+        border: 1px solid $color-blue-bayoux;
+        color: $color-white;
+        padding: 5px 10px;
+
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0 0px 0px $color-outrageous-orange, 0 0px 0px $color-outrageous-orange;
+        }
+    }
+
+    //Bootstrap overide
+    .form-control {
+        border: 1px solid $color-blue-bayoux;
+        box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+        border-radius: 0.25rem;
+        background-color: $color-oxford-blue;
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        color: $color-white;
+    }
+}

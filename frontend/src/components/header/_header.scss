@@ -1,0 +1,15 @@
+.cp-header {
+    height: 85px;
+    background-color: $color-oxford-blue;
+    margin-bottom: 25px;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+
+    div {
+        height: inherit;
+    }
+
+    .logo {
+        margin-left: 30px;
+        height: inherit;
+    }
+}

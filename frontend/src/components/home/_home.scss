@@ -1,0 +1,60 @@
+.cp-home {
+    height: inherit;
+
+    .post-list {
+        max-height: 432px;
+        overflow-x: auto;
+    }
+
+    .post-details {
+        height: 417px;
+    }
+
+    .post-container {
+        border: 1px solid $color-blue-bayoux;
+        border-radius: 2px;
+        box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+        padding: 15px;
+        margin: 10px 0px;
+        min-height: 50%;
+
+        .posts {
+            overflow-x: auto;
+            height: 100%;
+        }
+
+        .comments {
+            border: 1px solid $color-blue-bayoux;
+            height: 100%;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-radius: 2px;
+            box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+        }
+    }
+
+    .open-search {
+        position: fixed;
+        right: 25px;
+        bottom: 25px;
+
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0 2px 30px $color-outrageous-orange, 0 0px 0px $color-outrageous-orange;
+            border-radius: 50%;
+        }
+
+        a {
+            display: block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: $color-blue-bayoux;
+            background-image: url('../assets/add.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 28px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            font-size: 0;
+        }
+    }
+}

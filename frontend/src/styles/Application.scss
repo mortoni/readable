@@ -1,0 +1,45 @@
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+@import '../../node_modules/font-awesome/css/font-awesome.css';
+
+@import '_shared.scss';
+@import 'components/header/_header.scss';
+@import 'components/main/_main.scss';
+@import 'components/home/_home.scss';
+@import 'components/post/_post.scss';
+@import 'components/category/_category.scss';
+@import 'components/menu/_menu.scss';
+@import 'components/postDetails/_post-details.scss';
+@import 'components/modal/_modal.scss';
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: $color-oxford-blue;
+}
+
+.shadow {
+    /* Use -webkit- only if supporting: Chrome < 54, iOS < 9.3, Android < 4.4.4 */
+    -webkit-filter: drop-shadow( -5px -5px 5px #000 );
+            filter: drop-shadow( -5px -5px 5px #000 );
+}
+
+//Bootstrap overide
+
+.modal-header {
+    border-bottom: 1px solid $color-blue-bayoux;
+
+    .close {
+        color: white;
+    }
+}
+
+.modal-footer {
+    border-top: 1px solid $color-blue-bayoux;
+}
+
+.modal-content {
+    color: $color-white;
+    border: 2px solid $color-blue-bayoux;
+    background-color: $color-oxford-blue;
+}

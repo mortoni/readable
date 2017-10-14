@@ -1,0 +1,45 @@
+.cp-post-details {
+
+    .details {
+        text-align: center;
+        color: $color-white;
+        border: 1px solid $color-blue-bayoux;
+        border-radius: 2px;
+        box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+        padding: 15px;
+        margin: 10px 0px;
+        min-height: 50%;
+
+        .title {
+            border-bottom: 2px solid #50687d;
+        }
+
+        .author {
+            color: $color-blue-bayoux;
+            font-size: 10px;
+        }
+    }
+
+    .menu {
+        margin-top: 10px;
+
+        .item {
+            text-align: center;
+            color: white;
+            border: 1px solid $color-blue-bayoux;
+            border-radius: 2px;
+            box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+            transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+            margin-bottom: 25px;
+
+            &:hover {
+                cursor: pointer;
+                box-shadow: 0 0px 0px $color-outrageous-orange, 0 0px 0px $color-outrageous-orange;
+            }
+        }
+
+        .colored {
+            color: $color-blue-bayoux;
+        }
+    }
+}

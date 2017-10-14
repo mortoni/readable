@@ -1,0 +1,29 @@
+.cp-post {
+    .selected {
+        cursor: default !important;
+        outline: none !important;
+        border-color: $color-cerulean !important;
+        box-shadow: 0 0 10px $color-cerulean !important;
+    }
+
+    .card {
+        border: 1px solid $color-blue-bayoux;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border-radius: 2px;
+        box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+        padding: 5px;
+        margin-top: 10px;
+        color: $color-white;
+        background: $color-oxford-blue;
+        height: 65px;
+
+        .colorful {
+            color: $color-blue-bayoux;
+        }
+
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0 0px 0px $color-cerulean, 0 0px 0px $color-cerulean;
+        }
+    }
+}

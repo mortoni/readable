@@ -1,0 +1,23 @@
+.cp-menu {
+    .selected {
+        cursor: default !important;
+        outline: none !important;
+        border-color: $color-outrageous-orange !important;
+        box-shadow: 0 0 10px $color-outrageous-orange !important;
+    }
+    
+    .button {
+        text-align: center;
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        border-radius: 2px;
+        border: 1px solid $color-blue-bayoux;
+        color: $color-white;
+        padding: 3px;
+
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0 0px 0px $color-outrageous-orange, 0 0px 0px $color-outrageous-orange;
+        }
+    }
+}
