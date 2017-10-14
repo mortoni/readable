@@ -5,22 +5,82 @@ let db = {}
 const defaultData = {
   "8xf0y6ziyjabvozdd253nd": {
     id: '8xf0y6ziyjabvozdd253nd',
-    timestamp: 1467166872634,
-    title: 'Udacity is the best place to learn React',
-    body: 'Everyone says so after all.',
+    timestamp: 1507907473,
+    title: 'Laravel, the great!',
+    body: 'Laravel is a free, open-source PHP web framework.',
     author: 'thingtwo',
-    category: 'react',
-    voteScore: 6,
+    category: 'laravel',
+    voteScore: 3,
     deleted: false
   },
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
-    timestamp: 1468479767190,
-    title: 'Learn Redux in 10 minutes!',
-    body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+    timestamp: 1507911073,
+    title: 'Learn Ember in 10 minutes!',
+    body: 'It takes more than 10 minutes to learn technology.',
     author: 'thingone',
-    category: 'redux',
+    category: 'ember',
+    voteScore: -1,
+    deleted: false
+  },
+  "6ni6ok3ym7mf1p33lnea": {
+    id: '6ni6ok3ym7mf1p33lnea',
+    timestamp: 1507993873,
+    title: 'Great thing!',
+    body: 'Another comment',
+    author: 'thingone',
+    category: 'laravel',
+    voteScore: 2,
+    deleted: false
+  },
+  "6ni6ok3ym7mf1p33lneb": {
+    id: '6ni6ok3ym7mf1p33lneb',
+    timestamp: 1508512273,
+    title: 'Learn React in 10 minutes!',
+    body: 'It takes more than 10 minutes to learn technology.',
+    author: 'thingone',
+    category: 'react',
+    voteScore: 10,
+    deleted: false
+  },
+  "6ni6ok3ym7mf1p33lnec": {
+    id: '6ni6ok3ym7mf1p33lnec',
+    timestamp: 1510585873,
+    title: 'Angular my favorite!',
+    body: 'Angular rocks!.',
+    author: 'thingone',
+    category: 'angular',
     voteScore: -5,
+    deleted: false
+  },
+  "6ni6ok3ym7mf1p33lned": {
+    id: '6ni6ok3ym7mf1p33lned',
+    timestamp: 1539529873,
+    title: 'YAY I am learning angular!',
+    body: 'Any tips?',
+    author: 'thingone',
+    category: 'angular',
+    voteScore: 2,
+    deleted: false
+  },
+  "6ni6ok3ym7mf1p33lnef": {
+    id: '6ni6ok3ym7mf1p33lnef',
+    timestamp: 1542121873,
+    title: 'Ember sucks!',
+    body: 'What else can I say?',
+    author: 'thingone',
+    category: 'ember',
+    voteScore: 15,
+    deleted: false
+  },
+  "6ni6ok3ym7mf1p33lnee": {
+    id: '6ni6ok3ym7mf1p33lnee',
+    timestamp: 1476375073,
+    title: 'Good Bye Ember',
+    body: 'Just kidding. It already gone.',
+    author: 'thingone',
+    category: 'ember',
+    voteScore: -10,
     deleted: false
   }
 }
