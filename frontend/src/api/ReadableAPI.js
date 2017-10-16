@@ -25,11 +25,28 @@ export const addPost = post =>
         .then(res => res.json())
         .then(data => data);
 
-export const votePost = (postID, status) =>
+export const upVotePost = (postID) =>
     fetch(`${api}/posts/${postID}`, {
         method: "POST",
         headers: headers,
-        body: JSON.stringify({ option: status })
+        body: JSON.stringify({ option: "upVote" })
+    })
+        .then(res => res.json())
+        .catch(error => error);
+
+export const downVotePost = (postID) =>
+    fetch(`${api}/posts/${postID}`, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({ option: "downVote" })
+    })
+        .then(res => res.json())
+        .catch(error => error);
+
+export const deletePost = postID =>
+    fetch(`${api}/posts/${postID}`, {
+        method: "DELETE",
+        headers
     })
         .then(res => res.json())
         .catch(error => error);

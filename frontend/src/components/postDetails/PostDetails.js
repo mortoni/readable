@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
+import { deletePost, setSelected, upVotePost, downVotePost } from '../../actions'
 import { images, getTime } from '../../utils/util'
 import React from 'react'
 
 const PostDetails = (props) => {
-    const { post } = props
+    const { post, deletePost, upVotePost, downVotePost } = props
     const path = images.find(image => image.code === post.category)
 
     return (
@@ -34,30 +35,35 @@ const PostDetails = (props) => {
             <div className="col-4 menu">
 
                 <div className="row">
-                    <div className="col-12 col-sm-6 ">
-                        <div className="col-12 item colored">
+                    <div className="col-12 col-sm-6" onClick={() => upVotePost(post.id) }>
+                        <div className="col-12 item">
                             <i className="fa fa-thumbs-up" aria-hidden="true"></i>
                         </div>
                     </div>
 
-                    <div className="col-12 col-sm-6">
-                        <div className="col-12 item colored">
+                    <div className="col-12 col-sm-6" onClick={() => downVotePost(post.id) }>
+                        <div className="col-12 item">
                             <i className="fa fa-thumbs-down" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
 
+                <div className="row">
+                    <div className="col-12 col-sm-6" onClick={() => deletePost(post.id) }>
+                        <div className="col-12 item">
+                            <i className="fa fa-trash-o" aria-hidden="true"></i>
+                        </div>
+                    </div>
 
-                <div className="col item">
-                    delete
+                    <div className="col-12 col-sm-6">
+                        <div className="col-12 item">
+                            <i className="fa fa-pencil" aria-hidden="true"></i>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="col item">
-                    Edit
-                </div>
-
-                <div className="col item">
-                    Comment
+                    <i className="fa fa-comment-o" aria-hidden="true"></i>
                 </div>
             </div>
         </div>
@@ -70,4 +76,15 @@ function mapStateToProps({ load }) {
     };
 }
 
-export default connect(mapStateToProps)(PostDetails);
+function mapDispatchToProps(dispatch) {
+    return {
+        deletePost: (id) => {
+            dispatch(deletePost(id))
+            dispatch(setSelected('post', {}))
+        },
+        upVotePost: (postID) => dispatch(upVotePost(postID)),
+        downVotePost: (postID) => dispatch(downVotePost(postID)),
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);

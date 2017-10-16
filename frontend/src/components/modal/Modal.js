@@ -19,7 +19,6 @@ let PostForm = props => {
         );
     }
 
-
     return (
         <form onSubmit={ handleSubmit }>
             <div className="row">
@@ -39,7 +38,6 @@ let PostForm = props => {
                         component="input"/>
                 </div>
             </div>
-
 
             <div className="form-group">
                 <label htmlFor="body">Body</label>
@@ -123,17 +121,16 @@ class ModalPost extends Component {
             title: values.title,
             body: values.body,
             author: values.author,
-            category: 'react'
+            category: this.state.selected
         }
 
+        this.props.toggle()
         this.props.addPost(post)
     }
 
     setSelected = (selected) => {
         this.setState({ selected })
     }
-
-
 
     render() {
         const { modal, toggle } = this.props

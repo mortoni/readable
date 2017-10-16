@@ -15,6 +15,17 @@ export function orderBy(order) {
         dispatch({ type: ORDER_BY, order })
     };
 }
+
+export const DELETE_POST = "DELETE_POST";
+export function deletePost(id) {
+    return dispatch => {
+        ReadableAPI.deletePost(id).then(posts =>
+            dispatch({ type: DELETE_POST, id })
+        );
+    };
+}
+
+
 // export function getPosts() {
 //     return dispatch => {
 //         ReadableAPI.getPosts()
@@ -31,11 +42,20 @@ export function orderBy(order) {
 //     };
 // }
 
-export const VOTE_POST = "VOTE_POST";
-export function votePost(postID, vote) {
+export const UP_VOTE_POST = "UP_VOTE_POST";
+export function upVotePost(postID) {
     return dispatch => {
-        ReadableAPI.votePost(postID, vote).then(post =>
-            dispatch({ type: VOTE_POST, post })
+        ReadableAPI.upVotePost(postID).then(post =>
+            dispatch({ type: UP_VOTE_POST, post })
+        );
+    };
+}
+
+export const DOWN_VOTE_POST = "DOWN_VOTE_POST";
+export function downVotePost(postID) {
+    return dispatch => {
+        ReadableAPI.downVotePost(postID).then(post =>
+            dispatch({ type: DOWN_VOTE_POST, post })
         );
     };
 }

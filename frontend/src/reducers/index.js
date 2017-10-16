@@ -2,7 +2,8 @@ import { reducer as formReducer } from 'redux-form'
 import { combineReducers } from "redux"
 import {
     GET_POSTS,
-    VOTE_POST,
+    UP_VOTE_POST,
+    DOWN_VOTE_POST,
     VOTE_COMMENT,
     ADD_COMMENT,
     DELETE_COMMENT,
@@ -11,7 +12,8 @@ import {
     LOADING_CATEGORY,
     CATEGORY_LOADED,
     SET_SELECTED,
-    ORDER_BY
+    ORDER_BY,
+    DELETE_POST
 } from "../actions";
 
 const loadState = {
@@ -75,10 +77,25 @@ function posts(state = {}, action) {
                 allPosts: action.posts.sort((a, b) => a.voteScore < b.voteScore)
             };
 
-        case VOTE_POST:
+        case DELETE_POST:
             return {
                 ...state,
-                updatedPost: action.post
+                allPosts: state.allPosts.filter(post => post.id !== action.id)
+            }
+
+        case UP_VOTE_POST:
+            return {
+                ...state,
+                allPosts: state.allPosts
+                            .filter(post => post.id !== action.post.id)
+                            .concat([action.post])
+            };
+        case DOWN_VOTE_POST:
+            return {
+                ...state,
+                allPosts: state.allPosts
+                            .filter(post => post.id !== action.post.id)
+                            .concat([action.post])
             };
 
         case ADD_POST:
@@ -93,7 +110,7 @@ function posts(state = {}, action) {
                 ...state,
                 allPosts: action.order ?
                     state.allPosts.sort((a, b) => a.voteScore < b.voteScore) :
-                    state.allPosts.sort((a, b) => a.timestamp > b.timestamp)
+                    state.allPosts.sort((a, b) => a.timestamp < b.timestamp)
             }
 
         default:

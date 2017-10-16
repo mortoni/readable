@@ -134,17 +134,15 @@
   margin-top: 10px; }
   .cp-post-details .menu .item {
     text-align: center;
-    color: white;
+    color: #4f687d;
     border: 1px solid #4f687d;
     border-radius: 2px;
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    margin-bottom: 25px; }
+    margin-bottom: 20px; }
     .cp-post-details .menu .item:hover {
       cursor: pointer;
       box-shadow: 0 0px 0px #f95c3c, 0 0px 0px #f95c3c; }
-  .cp-post-details .menu .colored {
-    color: #4f687d; }
 
 .post-form .selected {
   cursor: default !important;
