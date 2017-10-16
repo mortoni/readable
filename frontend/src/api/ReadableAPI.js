@@ -16,13 +16,14 @@ const headers = {
 export const getPosts = () =>
     fetch(`${api}/posts`, { headers }).then(res => res.json());
 
-export const addPost = () =>
+export const addPost = post =>
     fetch(`${api}/posts`, {
         method: "POST",
-        headers
+        headers,
+        body: JSON.stringify(post)
     })
         .then(res => res.json())
-        .then(data => console.log(data));
+        .then(data => data);
 
 export const votePost = (postID, status) =>
     fetch(`${api}/posts/${postID}`, {

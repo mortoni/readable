@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { getCategories,
-         addPost,
          getPosts,
          loadingCategory } from '../../actions'
 import { connect } from 'react-redux'
@@ -74,7 +73,7 @@ class Home extends Component {
 
                 <div className="container mt-3 mb-3">
                     <div className="row">
-                        <div className="col-12">
+                        <div className="col-12 ol-sm-6 col-md-5">
                             <Menu />
                         </div>
                     </div>
@@ -95,10 +94,12 @@ class Home extends Component {
                 </div>
 
                 <div className="open-search">
-                    <a onClick={ this.toggle }>Add a Post</a>
+                    <a onClick={ this.toggle } >Add a Post</a>
                 </div>
 
-                <ModalPost modal={ modal } toggle={ this.toggle }/>
+                <ModalPost
+                    modal={ modal }
+                    toggle={ this.toggle }/>
             </div>
         );
     }
@@ -116,7 +117,6 @@ function mapDispatchToProps(dispatch) {
     return {
         getCategories: () => dispatch(getCategories()),
         loadingCategory: () => dispatch(loadingCategory()),
-        addPost: post => dispatch(addPost(post)),
         getPosts: () => dispatch(getPosts()),
     };
 }

@@ -27,10 +27,11 @@ const getPost = (post, selected, setSelected) => {
                 <div className="row">
 
                     <div className="col-3">
-                        <img src={ path.icon }
+                        { path && <img src={ path.icon }
                              alt="Category Icon"
                              width="50"
                              className="img-fluid"/>
+                         }
                     </div>
 
                     <div className="col-7">

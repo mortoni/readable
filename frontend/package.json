@@ -18,6 +18,7 @@
     "react-spinners": "^0.1.6",
     "reactstrap": "^5.0.0-alpha.3",
     "redux": "^3.7.2",
+    "redux-form": "^7.1.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "uuid": "^3.1.0"

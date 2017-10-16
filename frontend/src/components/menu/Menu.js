@@ -11,7 +11,7 @@ const allPost = (props) => {
     );
 
     return (
-        <div className="col-6 col-md-2">
+        <div className="col">
             <div className={ buttonClasses }
                  onClick={ () => setSelected('category', { path: '' }) }>
                  All posts
@@ -22,7 +22,7 @@ const allPost = (props) => {
 
 const OrderPost = ({ order, orderBy, toggleOrder }) => {
     return (
-        <div className="col-6 col-md-2">
+        <div className="col">
             <div className="button"
                  onClick={ () => {
                      orderBy(order)

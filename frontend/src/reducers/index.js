@@ -1,4 +1,5 @@
-import { combineReducers } from "redux";
+import { reducer as formReducer } from 'redux-form'
+import { combineReducers } from "redux"
 import {
     GET_POSTS,
     VOTE_POST,
@@ -83,7 +84,8 @@ function posts(state = {}, action) {
         case ADD_POST:
             return {
                 ...state,
-                addedPost: action.newPost
+                addedPost: action.newPost,
+                allPosts: state.allPosts.concat([action.newPost])
             }
 
         case ORDER_BY:
@@ -142,5 +144,6 @@ export default combineReducers({
     comments,
     categories,
     load,
-    selected
+    selected,
+    form: formReducer
 });

@@ -146,43 +146,65 @@
   .cp-post-details .menu .colored {
     color: #4f687d; }
 
-.cp-modal .selected {
+.post-form .selected {
   cursor: default !important;
   outline: none !important;
   border-color: #f95c3c !important;
   box-shadow: 0 0 10px #f95c3c !important; }
 
-.cp-modal .card {
-  height: 80px;
+.post-form .card {
+  height: 50px;
   border: 1px solid #4f687d;
   text-align: center;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   border-radius: 2px;
   background-color: #2e3d49; }
-  .cp-modal .card:hover {
+  .post-form .card:hover {
     cursor: pointer;
     box-shadow: 0 0px 0px #f95c3c, 0 0px 0px #f95c3c; }
 
-.cp-modal .button {
+.modal-body input {
+  border: 1px solid #4f687d;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  border-radius: 0.25rem;
+  background-color: #2e3d49;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  color: #FFFFFF;
+  padding-left: 10px;
+  width: 100%; }
+  .modal-body input:focus {
+    outline: none; }
+
+.modal-body textarea {
+  border: 1px solid #4f687d;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  border-radius: 0.25rem;
+  background-color: #2e3d49;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  color: white;
+  padding-left: 10px;
+  width: 100%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  height: 68px; }
+  .modal-body textarea:focus {
+    outline: none; }
+
+.modal-body button {
   text-align: center;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   border-radius: 2px;
   border: 1px solid #4f687d;
   color: #FFFFFF;
-  padding: 5px 10px; }
-  .cp-modal .button:hover {
+  background-color: #2e3d49;
+  color: white; }
+  .modal-body button:focus {
+    outline: none; }
+  .modal-body button:hover {
     cursor: pointer;
     box-shadow: 0 0px 0px #f95c3c, 0 0px 0px #f95c3c; }
-
-.cp-modal .form-control {
-  border: 1px solid #4f687d;
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-  border-radius: 0.25rem;
-  background-color: #2e3d49;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  color: #FFFFFF; }
 
 body {
   margin: 0;
