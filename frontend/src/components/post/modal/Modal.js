@@ -1,16 +1,16 @@
 import { Modal, ModalHeader, ModalBody } from 'reactstrap'
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { addPost } from '../../actions'
+import { addPost, closeModal } from '../../../actions'
 import { connect } from 'react-redux'
-import { images } from '../../utils/util'
+import { images } from '../../../utils/util'
 import classNames from 'classnames'
-import uuid from "uuid";
+import uuid from 'uuid'
 
 
 
-let PostForm = props => {
-    const { handleSubmit, toggle, selected, setSelected } = props
+let PostForm = (props) => {
+    const { handleSubmit, selected, setSelected, closeModal } = props
 
     const isSelected = (image) => {
          return classNames(
@@ -74,7 +74,7 @@ let PostForm = props => {
                 </div>
 
                 <div className="float-left">
-                    <button type="button" onClick={ toggle }>Cancel</button>
+                    <button type="button" onClick={ () => closeModal('post') }>Cancel</button>
                 </div>
             </div>
 
@@ -121,10 +121,11 @@ class ModalPost extends Component {
             title: values.title,
             body: values.body,
             author: values.author,
-            category: this.state.selected
+            category: this.state.selected,
+            comments: []
         }
 
-        this.props.toggle()
+        this.props.closeModal('post')
         this.props.addPost(post)
     }
 
@@ -133,20 +134,22 @@ class ModalPost extends Component {
     }
 
     render() {
-        const { modal, toggle } = this.props
+        const { modal, closeModal } = this.props
         const { selected } = this.state
 
         return (
             <div className="cp-modal">
-                <Modal isOpen={ modal } toggle={ toggle }>
-                    <ModalHeader toggle={ toggle }>Create Post</ModalHeader>
+                <Modal isOpen={ modal.post } toggle={ () => closeModal('post') }>
+                    <ModalHeader toggle={ () => closeModal('post') }>
+                        Create Post
+                    </ModalHeader>
 
                     <ModalBody>
                         <PostForm
                             onSubmit={ this.submit }
-                            toggle={ toggle }
                             selected={ selected }
-                            setSelected={ this.setSelected }/>
+                            setSelected={ this.setSelected }
+                            closeModal={ closeModal }/>
                     </ModalBody>
 
                 </Modal>
@@ -156,10 +159,17 @@ class ModalPost extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapStateToProps({ modal }) {
     return {
-        addPost: (post) => dispatch(addPost(post))
+        modal,
     };
 }
 
-export default connect(null, mapDispatchToProps)(ModalPost);
+function mapDispatchToProps(dispatch) {
+    return {
+        addPost: (post) => dispatch(addPost(post)),
+        closeModal: (modal) => dispatch(closeModal(modal)),
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalPost);

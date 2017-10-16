@@ -1,11 +1,37 @@
 import * as ReadableAPI from "../api/ReadableAPI";
 
+export const OPEN_MODAL = "OPEN_MODAL";
+export function openModal(modal, object, parentId) {
+    return dispatch => {
+        dispatch({ type: OPEN_MODAL, modal, object, parentId })
+    };
+}
+
+export const CLOSE_MODAL = "CLOSE_MODAL";
+export function closeModal(modal) {
+    return dispatch => {
+        dispatch({ type: CLOSE_MODAL, modal })
+    };
+}
+
 export const GET_POSTS = "GET_POSTS";
 export function getPosts() {
     return dispatch => {
-        ReadableAPI.getPosts().then(posts =>
-            dispatch({ type: GET_POSTS, posts })
-        );
+        ReadableAPI
+            .getPosts()
+            .then(posts =>
+                Promise.all(
+                    posts.map(post =>
+                        ReadableAPI
+                            .getComments(post.id)
+                            .then(comments => post.comments = comments)
+                            .then(() => post)
+                    )
+                )
+            )
+            .then(posts =>
+                dispatch({ type: GET_POSTS, posts })
+            );
     };
 }
 
@@ -24,23 +50,6 @@ export function deletePost(id) {
         );
     };
 }
-
-
-// export function getPosts() {
-//     return dispatch => {
-//         ReadableAPI.getPosts()
-//         .then(posts =>
-//             Promise.all(
-//                 posts.map(post =>
-//                     ReadableAPI.getComments(post.id)
-//                     .then(comments => (post.comments = comments))
-//                     .then(() => post)
-//                 )
-//             )
-//         )
-//         .then(posts => dispatch({ type: GET_POSTS, posts }));
-//     };
-// }
 
 export const UP_VOTE_POST = "UP_VOTE_POST";
 export function upVotePost(postID) {

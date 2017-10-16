@@ -1,10 +1,15 @@
 import { connect } from 'react-redux'
-import { deletePost, setSelected, upVotePost, downVotePost } from '../../actions'
-import { images, getTime } from '../../utils/util'
+import { deletePost,
+         setSelected,
+         upVotePost,
+         downVotePost,
+         openModal } from '../../../actions'
+import { images, getTime } from '../../../utils/util'
+import Comments from '../../comment/Comment'
 import React from 'react'
 
 const PostDetails = (props) => {
-    const { post, deletePost, upVotePost, downVotePost } = props
+    const { post, deletePost, upVotePost, downVotePost, openModal } = props
     const path = images.find(image => image.code === post.category)
 
     return (
@@ -62,9 +67,13 @@ const PostDetails = (props) => {
                     </div>
                 </div>
 
-                <div className="col item">
+                <div className="col item" onClick={ () => openModal('comment', {}, post.id) }>
                     <i className="fa fa-comment-o" aria-hidden="true"></i>
                 </div>
+            </div>
+
+            <div className="col-12 comments-content">
+                <Comments post={ post }/>
             </div>
         </div>
     )
@@ -84,6 +93,7 @@ function mapDispatchToProps(dispatch) {
         },
         upVotePost: (postID) => dispatch(upVotePost(postID)),
         downVotePost: (postID) => dispatch(downVotePost(postID)),
+        openModal: (modal, target, parentId) => dispatch(openModal(modal, target, parentId)),
     };
 }
 

@@ -38,4 +38,9 @@
             }
         }
     }
+
+    .comments-content {
+        max-height: 250px;
+        overflow-x: auto;
+    }
 }

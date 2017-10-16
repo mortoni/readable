@@ -55,28 +55,6 @@
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
       font-size: 0; }
 
-.cp-post .selected {
-  cursor: default !important;
-  outline: none !important;
-  border-color: #02B3E4 !important;
-  box-shadow: 0 0 10px #02B3E4 !important; }
-
-.cp-post .card {
-  border: 1px solid #4f687d;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  border-radius: 2px;
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-  padding: 5px;
-  margin-top: 10px;
-  color: #FFFFFF;
-  background: #2e3d49;
-  height: 65px; }
-  .cp-post .card .colorful {
-    color: #4f687d; }
-  .cp-post .card:hover {
-    cursor: pointer;
-    box-shadow: 0 0px 0px #02B3E4, 0 0px 0px #02B3E4; }
-
 .cp-category .selected {
   cursor: default !important;
   outline: none !important;
@@ -115,6 +93,28 @@
     cursor: pointer;
     box-shadow: 0 0px 0px #f95c3c, 0 0px 0px #f95c3c; }
 
+.cp-post .selected {
+  cursor: default !important;
+  outline: none !important;
+  border-color: #02B3E4 !important;
+  box-shadow: 0 0 10px #02B3E4 !important; }
+
+.cp-post .card {
+  border: 1px solid #4f687d;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 2px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  padding: 5px;
+  margin-top: 10px;
+  color: #FFFFFF;
+  background: #2e3d49;
+  height: 65px; }
+  .cp-post .card .colorful {
+    color: #4f687d; }
+  .cp-post .card:hover {
+    cursor: pointer;
+    box-shadow: 0 0px 0px #02B3E4, 0 0px 0px #02B3E4; }
+
 .cp-post-details .details {
   text-align: center;
   color: #FFFFFF;
@@ -143,6 +143,10 @@
     .cp-post-details .menu .item:hover {
       cursor: pointer;
       box-shadow: 0 0px 0px #f95c3c, 0 0px 0px #f95c3c; }
+
+.cp-post-details .comments-content {
+  max-height: 250px;
+  overflow-x: auto; }
 
 .post-form .selected {
   cursor: default !important;
@@ -203,6 +207,21 @@
   .modal-body button:hover {
     cursor: pointer;
     box-shadow: 0 0px 0px #f95c3c, 0 0px 0px #f95c3c; }
+
+.cp-comments .card {
+  height: 100px;
+  border: 1px solid #4f687d;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 2px;
+  background-color: #2e3d49;
+  color: #FFFFFF;
+  margin-bottom: 10px; }
+  .cp-comments .card .author {
+    color: #4f687d;
+    font-size: 10px; }
 
 body {
   margin: 0;

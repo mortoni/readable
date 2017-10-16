@@ -1,0 +1,19 @@
+.cp-comments {
+    .card {
+        height: 100px;
+        border: 1px solid $color-blue-bayoux;
+        padding: 10px;
+        text-align: center;
+        box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border-radius: 2px;
+        background-color: $color-oxford-blue;
+        color: $color-white;
+        margin-bottom: 10px;
+
+        .author {
+            color: $color-blue-bayoux;
+            font-size: 10px;
+        }
+    }
+}

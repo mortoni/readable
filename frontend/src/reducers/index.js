@@ -13,7 +13,9 @@ import {
     CATEGORY_LOADED,
     SET_SELECTED,
     ORDER_BY,
-    DELETE_POST
+    DELETE_POST,
+    OPEN_MODAL,
+    CLOSE_MODAL
 } from "../actions";
 
 const loadState = {
@@ -28,6 +30,35 @@ const select = {
         path: ''
     },
     post: {}
+}
+
+const modalState = {
+    post: false,
+    comment: false,
+    target: {},
+    parentId: null
+}
+
+function modal(state = modalState, action) {
+    const { modal, object, parentId } = action
+
+    switch (action.type) {
+        case OPEN_MODAL:
+            return {
+                ...state,
+                [modal]: true,
+                target: object,
+                parentId
+            };
+        case CLOSE_MODAL:
+            return {
+                ...state,
+                [modal]: false,
+                target: {}
+            };
+        default:
+            return { ...state };
+    }
 }
 
 function selected(state = select, action) {
@@ -70,6 +101,8 @@ function load(state = loadState, action) {
 }
 
 function posts(state = {}, action) {
+    const { comment } = action
+
     switch (action.type) {
         case GET_POSTS:
             return {
@@ -113,23 +146,21 @@ function posts(state = {}, action) {
                     state.allPosts.sort((a, b) => a.timestamp < b.timestamp)
             }
 
-        default:
-            return { ...state };
-    }
-}
-
-function comments(state = {}, action) {
-    switch (action.type) {
-        case VOTE_COMMENT:
-            return {
-                ...state,
-                updatedComment: action.comment
-            };
-
         case ADD_COMMENT:
             return {
                 ...state,
-                addedComment: action.comment
+                allPosts: state.allPosts
+                            .map(post => {
+                                if(post.comments === undefined) {
+                                    post.comments = []
+                                }
+
+                                if(post.id === comment.parentId) {
+                                    return post.comments.concat([comment])
+                                }
+                                return post
+                                //investigar aqui
+                            })
             };
 
         case DELETE_COMMENT:
@@ -158,9 +189,9 @@ function categories(state = {}, action) {
 
 export default combineReducers({
     posts,
-    comments,
     categories,
     load,
     selected,
+    modal,
     form: formReducer
 });

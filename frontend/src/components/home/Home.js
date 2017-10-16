@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { getCategories,
          getPosts,
-         loadingCategory } from '../../actions'
+         loadingCategory,
+         openModal } from '../../actions'
 import { connect } from 'react-redux'
 import Category from '../category/Category'
 import Post from '../post/Post'
-import ModalPost from '../modal/Modal'
-import PostDetails from '../postDetails/PostDetails'
+import ModalPost from '../post/modal/Modal'
+import ModalComment from '../comment/modal/Modal'
+import PostDetails from '../post/details/Details'
 import Menu from '../menu/Menu'
 
 
@@ -23,12 +25,6 @@ class Home extends Component {
         this.state = {
             modal: false
         }
-    }
-
-    toggle = () => {
-        this.setState({
-          modal: !this.state.modal
-        })
     }
 
     categories = () => {
@@ -64,8 +60,7 @@ class Home extends Component {
     }
 
     render() {
-        const { selected } = this.props
-        const { modal } = this.state
+        const { selected, openModal, modal } = this.props
 
         return (
             <div className="cp-home">
@@ -94,22 +89,22 @@ class Home extends Component {
                 </div>
 
                 <div className="open-search">
-                    <a onClick={ this.toggle } >Add a Post</a>
+                    <a onClick={ () => openModal('post', {}, null) } >Add a Post</a>
                 </div>
 
-                <ModalPost
-                    modal={ modal }
-                    toggle={ this.toggle }/>
+                <ModalPost modal={ modal.post }/>
+                <ModalComment modal={ modal.comment }/>
             </div>
         );
     }
 }
 
-function mapStateToProps({ categories, posts, selected }) {
+function mapStateToProps({ categories, posts, selected, modal }) {
     return {
         categories: categories || [],
         posts: posts || [],
-        selected
+        selected,
+        modal,
     };
 }
 
@@ -118,6 +113,7 @@ function mapDispatchToProps(dispatch) {
         getCategories: () => dispatch(getCategories()),
         loadingCategory: () => dispatch(loadingCategory()),
         getPosts: () => dispatch(getPosts()),
+        openModal: (modal, target, parentId) => dispatch(openModal(modal, target, parentId)),
     };
 }
 
