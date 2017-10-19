@@ -10,6 +10,8 @@
   .cp-header .logo {
     margin-left: 30px;
     height: inherit; }
+  .cp-header .author {
+    color: #4f687d; }
 
 .cp-home {
   height: inherit; }
@@ -136,13 +138,13 @@
     text-align: center;
     color: #4f687d;
     border: 1px solid #4f687d;
-    border-radius: 2px;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-radius: 20px;
     margin-bottom: 20px; }
+    .cp-post-details .menu .item:active {
+      background: #4f687d;
+      color: #2e3d49; }
     .cp-post-details .menu .item:hover {
-      cursor: pointer;
-      box-shadow: 0 0px 0px #f95c3c, 0 0px 0px #f95c3c; }
+      cursor: pointer; }
 
 .cp-post-details .comments-content {
   max-height: 250px;
@@ -168,10 +170,8 @@
 
 .modal-body input {
   border: 1px solid #4f687d;
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   border-radius: 0.25rem;
   background-color: #2e3d49;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   color: #FFFFFF;
   padding-left: 10px;
   width: 100%; }
@@ -180,11 +180,9 @@
 
 .modal-body textarea {
   border: 1px solid #4f687d;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
   border-radius: 0.25rem;
   background-color: #2e3d49;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  color: white;
+  color: #FFFFFF;
   padding-left: 10px;
   width: 100%;
   margin-top: 0px;
@@ -195,18 +193,19 @@
 
 .modal-body button {
   text-align: center;
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  border-radius: 2px;
+  border-radius: 20px;
   border: 1px solid #4f687d;
   color: #FFFFFF;
   background-color: #2e3d49;
-  color: white; }
+  color: white;
+  padding: 2px 30px; }
+  .modal-body button:active {
+    background: #4f687d;
+    color: #2e3d49; }
   .modal-body button:focus {
     outline: none; }
   .modal-body button:hover {
-    cursor: pointer;
-    box-shadow: 0 0px 0px #f95c3c, 0 0px 0px #f95c3c; }
+    cursor: pointer; }
 
 .cp-comments .card {
   height: 100px;

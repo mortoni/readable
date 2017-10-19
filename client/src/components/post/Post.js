@@ -6,8 +6,6 @@ import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
-import '../../styles/Application.css'
-
 const isSelected = (post, selected) => {
     return post.id === selected.post.id
 }

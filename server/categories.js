@@ -1,5 +1,6 @@
 const clone = require('clone')
 const config = require('./config')
+const express = require('express')
 
 let db = {}
 
@@ -7,19 +8,27 @@ const defaultData = {
   categories: [
       {
         name: 'Laravel',
-        path: 'laravel'
+        path: 'laravel',
+        image: '../assets/laravel.png',
+        icon: '../assets/laravel_icon.png'
       },
       {
         name: 'Ember',
-        path: 'ember'
+        path: 'ember',
+        image: '../assets/ember.png',
+        icon: '../assets/ember_icon.png'
       },
       {
         name: 'React',
-        path: 'react'
+        path: 'react',
+        image: '../assets/react.svg',
+        icon: '../assets/react_icon.png'
       },
       {
         name: 'Angular',
-        path: 'angular'
+        path: 'angular',
+        image: '../assets/angular.svg',
+        icon: '../assets/angular_icon.png'
       }
   ]
 }

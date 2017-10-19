@@ -8,7 +8,7 @@ import '../../styles/Application.css'
 const Main = () => {
     return (
         <section className="section">
-            <Header/>
+            <Header />
 
             <Route exact path="/"
                 render={() => (
@@ -17,6 +17,7 @@ const Main = () => {
                     </div>
                 )}
             />
+            
         </section>
     );
 };

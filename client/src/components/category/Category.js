@@ -6,8 +6,6 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
-import '../../styles/Application.css'
-
 const GetImage = (categoryPath) => {
     const path = images.find(image => image.code === categoryPath)
 
@@ -75,7 +73,7 @@ Category.propTypes = {
   category: PropTypes.object.isRequired
 };
 
-function mapStateToProps({ load, selected }) {
+function mapStateToProps({ load, selected, categories }) {
     return {
         load: load,
         selected: selected

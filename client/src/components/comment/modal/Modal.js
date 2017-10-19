@@ -14,7 +14,9 @@ class CommentForm extends Component {
     }
 
     render() {
-        const { handleSubmit, closeModal } = this.props
+        const { handleSubmit, closeModal, target } = this.props
+
+        const button = target.id ? 'Edit' : 'Create'
 
         return (
             <form onSubmit={ handleSubmit }>
@@ -36,11 +38,11 @@ class CommentForm extends Component {
 
                 <div className="col">
                     <div className="float-right">
-                        <button type="submit">Create</button>
+                        <button type="submit"> { button } </button>
                     </div>
 
                     <div className="float-left">
-                        <button type="button" onClick={ () => closeModal('post') }>Cancel</button>
+                        <button type="button" onClick={ () => closeModal('comment') }>Cancel</button>
                     </div>
                 </div>
 
@@ -55,6 +57,8 @@ CommentForm = reduxForm({
 
 const ModalComment = (props) => {
     const { modal, closeModal, addComment, editComment } = props
+
+    const title = modal.target.id ? 'Edit Comment' : 'Create Comment'
 
     const submit = (values) => {
         const comment = {
@@ -78,7 +82,7 @@ const ModalComment = (props) => {
         <div className="cp-comment-modal">
             <Modal isOpen={ modal.comment } toggle={ () => closeModal('comment') }>
                 <ModalHeader toggle={ () => closeModal('comment') }>
-                    Create Comment
+                    { title }
                 </ModalHeader>
 
                 <ModalBody>

@@ -19,7 +19,7 @@ import {
     DOWN_VOTE_COMMENT,
     EDIT_POST,
     EDIT_COMMENT
-} from "../actions";
+} from "../actions/actionTypes";
 
 const loadState = {
     ember: false,
@@ -125,6 +125,7 @@ function posts(state = {}, action) {
                 allPosts: state.allPosts
                             .filter(post => post.id !== action.editedPost.id)
                             .concat([action.editedPost])
+                            .sort((a, b) => a.voteScore < b.voteScore)
             }
 
         case EDIT_COMMENT:
@@ -134,7 +135,9 @@ function posts(state = {}, action) {
                             .map(post => {
                                 if(post.id === action.editedComment.parentId){
                                     post.comments = post.comments
-                                                        .filter(comment => comment.id !== action.editedComment.id).concat([action.editedComment])
+                                                        .filter(comment => comment.id !== action.editedComment.id)
+                                                        .concat([action.editedComment])
+                                                        .sort((a, b) => a.voteScore < b.voteScore)
                                 }
                                 return post
                             })

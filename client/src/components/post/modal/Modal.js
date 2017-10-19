@@ -24,69 +24,71 @@ class PostForm extends Component {
     }
 
     render() {
-        const { handleSubmit, setSelected, closeModal } = this.props
+        const { handleSubmit, setSelected, closeModal, target } = this.props
 
-    return (
-        <form onSubmit={ handleSubmit }>
-            <div className="row">
-                <div className="form-group col-12 col-sm-6">
-                    <label htmlFor="title">Title</label>
-                    <Field
-                        type="text"
-                        name="title"
-                        component="input"/>
+        const button = target.id ? 'Edit' : 'Create'
+
+        return (
+            <form onSubmit={ handleSubmit }>
+                <div className="row">
+                    <div className="form-group col-12 col-sm-6">
+                        <label htmlFor="title">Title</label>
+                        <Field
+                            type="text"
+                            name="title"
+                            component="input"/>
+                    </div>
+
+                    <div className="form-group col-12 col-sm-6">
+                        <label htmlFor="author">Author</label>
+                        <Field
+                            type="text"
+                            name="author"
+                            component="input"/>
+                    </div>
                 </div>
 
-                <div className="form-group col-12 col-sm-6">
-                    <label htmlFor="author">Author</label>
+                <div className="form-group">
+                    <label htmlFor="body">Body</label>
                     <Field
                         type="text"
-                        name="author"
-                        component="input"/>
+                        name="body"
+                        component="textarea"/>
                 </div>
-            </div>
 
-            <div className="form-group">
-                <label htmlFor="body">Body</label>
-                <Field
-                    type="text"
-                    name="body"
-                    component="textarea"/>
-            </div>
-
-            <div className="form-group">
-                <label >Category</label>
-                <div className="row post-form mb-5">
-                    { images.map(image => (
-                        <div key={ image.code } className="col" onClick={ () => setSelected(image.code)}>
-                            <div className={ this.isSelected(image) }>
-                                <div className="d-flex h-100">
-                                    <div className="justify-content-center align-self-center mx-auto d-block">
-                                        <img src={ image.icon }
-                                             alt="Category Figure"
-                                             className="img-fluid"
-                                             width="50"/>
+                <div className="form-group">
+                    <label >Category</label>
+                    <div className="row post-form mb-5">
+                        { images.map(image => (
+                            <div key={ image.code } className="col" onClick={ () => setSelected(image.code)}>
+                                <div className={ this.isSelected(image) }>
+                                    <div className="d-flex h-100">
+                                        <div className="justify-content-center align-self-center mx-auto d-block">
+                                            <img src={ image.icon }
+                                                 alt="Category Figure"
+                                                 className="img-fluid"
+                                                 width="50"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                    ))}
-                </div>
-            </div>
-
-            <div className="col">
-                <div className="float-right">
-                    <button type="submit">Create</button>
+                        ))}
+                    </div>
                 </div>
 
-                <div className="float-left">
-                    <button type="button" onClick={ () => closeModal('post') }>Cancel</button>
-                </div>
-            </div>
+                <div className="col">
+                    <div className="float-right">
+                        <button type="submit"> { button } </button>
+                    </div>
 
-        </form>
-    )
+                    <div className="float-left">
+                        <button type="button" onClick={ () => closeModal('post') }>Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        )
     }
 }
 
@@ -101,19 +103,6 @@ class ModalPost extends Component {
             selected: ''
         }
     }
-
-    // componentDidMount() {
-    //   this.handleInitialize();
-    // }
-    //
-    // handleInitialize() {
-    //   const test = this.props
-    //   const initData = {
-    //     "title": this.props,
-    //     "author": this.props,
-    //     "body": this.props
-    //   };
-    // }
 
     setSelected(selected) {
         this.setState(state => ({
@@ -165,13 +154,13 @@ class ModalPost extends Component {
         const { modal, closeModal } = this.props
         const { selected } = this.state
 
-
+        const title = modal.target.id ? 'Edit Post' : 'Create Post'
 
         return (
             <div className="cp-modal">
                 <Modal isOpen={ modal.post } toggle={ () => closeModal('post') }>
                     <ModalHeader toggle={ () => closeModal('post') }>
-                        Create Post
+                        { title }
                     </ModalHeader>
 
                     <ModalBody>
