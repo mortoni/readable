@@ -69,11 +69,20 @@ export function downVotePost(postID) {
     };
 }
 
-export const VOTE_COMMENT = "VOTE_COMMENT";
-export function voteComment(postID, vote) {
+export const UP_VOTE_COMMENT = "UP_VOTE_COMMENT";
+export function upVoteComment(commentID) {
     return dispatch => {
-        ReadableAPI.voteComment(postID, vote).then(comment =>
-            dispatch({ type: VOTE_COMMENT, comment })
+        ReadableAPI.upVoteComment(commentID).then(comment =>
+            dispatch({ type: UP_VOTE_COMMENT, comment })
+        );
+    };
+}
+
+export const DOWN_VOTE_COMMENT = "DOWN_VOTE_COMMENT";
+export function downVoteComment(commentID) {
+    return dispatch => {
+        ReadableAPI.downVoteComment(commentID).then(comment =>
+            dispatch({ type: DOWN_VOTE_COMMENT, comment })
         );
     };
 }
@@ -81,9 +90,11 @@ export function voteComment(postID, vote) {
 export const ADD_COMMENT = "ADD_COMMENT";
 export function addComment(comment) {
     return dispatch => {
-        ReadableAPI.addComment(comment).then(comment =>
+        const modal = 'comment'
+        ReadableAPI.addComment(comment).then(comment => {
             dispatch({ type: ADD_COMMENT, comment })
-        );
+            dispatch({ type: CLOSE_MODAL, modal })
+        });
     };
 }
 
@@ -123,6 +134,29 @@ export function deleteComment(commentID) {
         ReadableAPI.deleteComment(commentID).then(comment =>
             dispatch({ type: DELETE_COMMENT, comment })
         );
+    };
+}
+
+export const EDIT_POST = "EDIT_POST";
+export function editPost(post) {
+    return dispatch => {
+        ReadableAPI.editPost(post).then(editedPost => {
+            const who = 'post'
+            const object = {}
+            dispatch({ type: EDIT_POST, editedPost })
+            dispatch({ type: SET_SELECTED, who, object })
+        });
+    };
+}
+
+export const EDIT_COMMENT = "EDIT_COMMENT";
+export function editComment(comment) {
+    return dispatch => {
+        const modal = 'comment'
+        ReadableAPI.editComment(comment).then(editedComment => {
+            dispatch({ type: EDIT_COMMENT, editedComment })
+            dispatch({ type: CLOSE_MODAL, modal })
+        });
     };
 }
 

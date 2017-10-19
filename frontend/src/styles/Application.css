@@ -222,6 +222,15 @@
   .cp-comments .card .author {
     color: #4f687d;
     font-size: 10px; }
+  .cp-comments .card .item {
+    color: #4f687d;
+    border: 1px solid #4f687d;
+    border-radius: 20px; }
+    .cp-comments .card .item:active {
+      background: #4f687d;
+      color: #2e3d49; }
+    .cp-comments .card .item:hover {
+      cursor: pointer; }
 
 body {
   margin: 0;

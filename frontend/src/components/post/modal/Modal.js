@@ -1,23 +1,30 @@
 import { Modal, ModalHeader, ModalBody } from 'reactstrap'
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { addPost, closeModal } from '../../../actions'
+import { addPost, closeModal, editPost } from '../../../actions'
 import { connect } from 'react-redux'
 import { images } from '../../../utils/util'
 import classNames from 'classnames'
 import uuid from 'uuid'
 
+class PostForm extends Component {
 
-
-let PostForm = (props) => {
-    const { handleSubmit, selected, setSelected, closeModal } = props
-
-    const isSelected = (image) => {
+    isSelected = (image) => {
          return classNames(
             'card',
-            { 'selected': image.code === selected }
+            { 'selected': image.code === this.props.selected }
         );
     }
+
+    componentWillMount() {
+        if(this.props.target.id !== undefined) {
+            this.props.initialize(this.props.target)
+            this.props.setSelected(this.props.target.category)
+        }
+    }
+
+    render() {
+        const { handleSubmit, setSelected, closeModal } = this.props
 
     return (
         <form onSubmit={ handleSubmit }>
@@ -52,7 +59,7 @@ let PostForm = (props) => {
                 <div className="row post-form mb-5">
                     { images.map(image => (
                         <div key={ image.code } className="col" onClick={ () => setSelected(image.code)}>
-                            <div className={ isSelected(image) }>
+                            <div className={ this.isSelected(image) }>
                                 <div className="d-flex h-100">
                                     <div className="justify-content-center align-self-center mx-auto d-block">
                                         <img src={ image.icon }
@@ -80,10 +87,11 @@ let PostForm = (props) => {
 
         </form>
     )
+    }
 }
 
 PostForm = reduxForm({
-  form: 'post'
+  form: 'createPost'
 })(PostForm)
 
 class ModalPost extends Component {
@@ -93,6 +101,19 @@ class ModalPost extends Component {
             selected: ''
         }
     }
+
+    // componentDidMount() {
+    //   this.handleInitialize();
+    // }
+    //
+    // handleInitialize() {
+    //   const test = this.props
+    //   const initData = {
+    //     "title": this.props,
+    //     "author": this.props,
+    //     "body": this.props
+    //   };
+    // }
 
     setSelected(selected) {
         this.setState(state => ({
@@ -116,17 +137,24 @@ class ModalPost extends Component {
 
     submit = (values) => {
         const post = {
-            id: uuid().split("-").join(""),
-            timestamp: Date.now(),
+            id: values.id || uuid().split("-").join(""),
+            timestamp: values.timestamp || Date.now(),
             title: values.title,
             body: values.body,
             author: values.author,
             category: this.state.selected,
-            comments: []
+            comments: values.comments || []
         }
 
+        if(values.id === undefined) {
+            this.props.addPost(post)
+        } else {
+            this.props.editPost(post)
+        }
+
+
         this.props.closeModal('post')
-        this.props.addPost(post)
+
     }
 
     setSelected = (selected) => {
@@ -136,6 +164,8 @@ class ModalPost extends Component {
     render() {
         const { modal, closeModal } = this.props
         const { selected } = this.state
+
+
 
         return (
             <div className="cp-modal">
@@ -149,7 +179,8 @@ class ModalPost extends Component {
                             onSubmit={ this.submit }
                             selected={ selected }
                             setSelected={ this.setSelected }
-                            closeModal={ closeModal }/>
+                            closeModal={ closeModal }
+                            target={ modal.target }/>
                     </ModalBody>
 
                 </Modal>
@@ -169,6 +200,7 @@ function mapDispatchToProps(dispatch) {
     return {
         addPost: (post) => dispatch(addPost(post)),
         closeModal: (modal) => dispatch(closeModal(modal)),
+        editPost: (post) => dispatch(editPost(post)),
     };
 }
 

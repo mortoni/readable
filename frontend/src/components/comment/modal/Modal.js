@@ -1,43 +1,52 @@
 import { Modal, ModalHeader, ModalBody } from 'reactstrap'
-import { closeModal, addComment } from '../../../actions'
+import { closeModal, addComment, editComment } from '../../../actions'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-import React from 'react'
+import React, {Component} from 'react'
 import uuid from 'uuid'
 
-let CommentForm = (props) => {
-    const { handleSubmit, closeModal } = props
+class CommentForm extends Component {
 
-    return (
-        <form onSubmit={ handleSubmit }>
-            <div className="form-group">
-                <label htmlFor="body">Body</label>
-                <Field
-                    type="text"
-                    name="body"
-                    component="textarea"/>
-            </div>
+    componentWillMount() {
+        if(this.props.target.id !== undefined) {
+            this.props.initialize(this.props.target)
+        }
+    }
 
-            <div className="form-group">
-                <label htmlFor="author">Author</label>
-                <Field
-                    type="text"
-                    name="author"
-                    component="input"/>
-            </div>
+    render() {
+        const { handleSubmit, closeModal } = this.props
 
-            <div className="col">
-                <div className="float-right">
-                    <button type="submit">Create</button>
+        return (
+            <form onSubmit={ handleSubmit }>
+                <div className="form-group">
+                    <label htmlFor="body">Body</label>
+                    <Field
+                        type="text"
+                        name="body"
+                        component="textarea"/>
                 </div>
 
-                <div className="float-left">
-                    <button type="button" onClick={ () => closeModal('post') }>Cancel</button>
+                <div className="form-group">
+                    <label htmlFor="author">Author</label>
+                    <Field
+                        type="text"
+                        name="author"
+                        component="input"/>
                 </div>
-            </div>
 
-        </form>
-    )
+                <div className="col">
+                    <div className="float-right">
+                        <button type="submit">Create</button>
+                    </div>
+
+                    <div className="float-left">
+                        <button type="button" onClick={ () => closeModal('post') }>Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        )
+    }
 }
 
 CommentForm = reduxForm({
@@ -45,19 +54,24 @@ CommentForm = reduxForm({
 })(CommentForm)
 
 const ModalComment = (props) => {
-    const { modal, closeModal, addComment } = props
+    const { modal, closeModal, addComment, editComment } = props
 
     const submit = (values) => {
         const comment = {
-            id: uuid().split("-").join(""),
-            timestamp: Date.now(),
+            id: values.id || uuid().split("-").join(""),
+            timestamp: values.timestamp || Date.now(),
             body: values.body,
             author: values.author,
             parentId: modal.parentId
         }
 
-        closeModal('comment')
-        addComment(comment)
+        if(values.id === undefined) {
+            addComment(comment)
+        } else {
+            editComment(comment)
+        }
+
+        closeModal('post')
     }
 
     return (
@@ -70,7 +84,8 @@ const ModalComment = (props) => {
                 <ModalBody>
                     <CommentForm
                         onSubmit={ submit }
-                        closeModal={ closeModal }/>
+                        closeModal={ closeModal }
+                        target={ modal.target }/>
                 </ModalBody>
 
             </Modal>
@@ -88,7 +103,8 @@ function mapStateToProps({ modal }) {
 function mapDispatchToProps(dispatch) {
     return {
         closeModal: (modal) => dispatch(closeModal(modal)),
-        addComment: (comment) => dispatch(addComment(comment))
+        addComment: (comment) => dispatch(addComment(comment)),
+        editComment: (comment) => dispatch(editComment(comment)),
     };
 }
 

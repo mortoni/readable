@@ -44,6 +44,24 @@ export const downVotePost = (postID) =>
         .then(res => res.json())
         .catch(error => error);
 
+export const upVoteComment = (commentID) =>
+    fetch(`${api}/comments/${commentID}`, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({ option: "upVote" })
+    })
+        .then(res => res.json())
+        .catch(error => error);
+
+export const downVoteComment = (commentID) =>
+    fetch(`${api}/comments/${commentID}`, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({ option: "downVote" })
+    })
+        .then(res => res.json())
+        .catch(error => error);
+
 export const deletePost = postID =>
     fetch(`${api}/posts/${postID}`, {
         method: "DELETE",
@@ -58,20 +76,10 @@ export const getComments = postID =>
         headers
     }).then(res => res.json());
 
-export const voteComment = (postID, status) =>
-    fetch(`${api}/comments/${postID}`, {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify({ option: status })
-    })
-        .then(res => res.json())
-        .catch(error => error);
-
 export const addComment = comment =>
     fetch(`${api}/comments/`, {
         method: "POST",
         headers,
-        // body: JSON.stringify(comment)
         body: JSON.stringify(comment)
     })
         .then(res => res.json())
@@ -82,13 +90,28 @@ export const deleteComment = commentID =>
         method: "DELETE",
         headers
     })
-        .then(res => {
-            console.log(res);
-            return res.json();
-        })
+        .then(res => res.json())
         .catch(error => error);
 
 export const getCategories = () =>
     fetch(`${api}/categories`, { headers })
+        .then(res => res.json())
+        .catch(error => error);
+
+export const editPost = (post) =>
+    fetch(`${api}/posts/${post.id}`, {
+        method: "PUT",
+        headers,
+        body: JSON.stringify(post)
+    })
+        .then(res => res.json())
+        .catch(error => error);
+
+export const editComment = (comment) => 
+    fetch(`${api}/comments/${comment.id}`, {
+        method: "PUT",
+        headers,
+        body: JSON.stringify(comment)
+    })
         .then(res => res.json())
         .catch(error => error);

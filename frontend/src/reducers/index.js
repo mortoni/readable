@@ -4,7 +4,6 @@ import {
     GET_POSTS,
     UP_VOTE_POST,
     DOWN_VOTE_POST,
-    VOTE_COMMENT,
     ADD_COMMENT,
     DELETE_COMMENT,
     GET_CATEGORIES,
@@ -15,7 +14,11 @@ import {
     ORDER_BY,
     DELETE_POST,
     OPEN_MODAL,
-    CLOSE_MODAL
+    CLOSE_MODAL,
+    UP_VOTE_COMMENT,
+    DOWN_VOTE_COMMENT,
+    EDIT_POST,
+    EDIT_COMMENT
 } from "../actions";
 
 const loadState = {
@@ -116,19 +119,48 @@ function posts(state = {}, action) {
                 allPosts: state.allPosts.filter(post => post.id !== action.id)
             }
 
+        case EDIT_POST:
+            return {
+                ...state,
+                allPosts: state.allPosts
+                            .filter(post => post.id !== action.editedPost.id)
+                            .concat([action.editedPost])
+            }
+
+        case EDIT_COMMENT:
+            return {
+                ...state,
+                allPosts: state.allPosts
+                            .map(post => {
+                                if(post.id === action.editedComment.parentId){
+                                    post.comments = post.comments
+                                                        .filter(comment => comment.id !== action.editedComment.id).concat([action.editedComment])
+                                }
+                                return post
+                            })
+            }
+
         case UP_VOTE_POST:
             return {
                 ...state,
                 allPosts: state.allPosts
-                            .filter(post => post.id !== action.post.id)
-                            .concat([action.post])
+                            .map(post => {
+                                if(post.id === action.post.id) {
+                                    post.voteScore = action.post.voteScore
+                                }
+                                return post
+                            })
             };
         case DOWN_VOTE_POST:
             return {
                 ...state,
                 allPosts: state.allPosts
-                            .filter(post => post.id !== action.post.id)
-                            .concat([action.post])
+                            .map(post => {
+                                if(post.id === action.post.id) {
+                                    post.voteScore = action.post.voteScore
+                                }
+                                return post
+                            })
             };
 
         case ADD_POST:
@@ -151,22 +183,60 @@ function posts(state = {}, action) {
                 ...state,
                 allPosts: state.allPosts
                             .map(post => {
-                                if(post.comments === undefined) {
-                                    post.comments = []
-                                }
-
                                 if(post.id === comment.parentId) {
-                                    return post.comments.concat([comment])
+                                    post.comments = post.comments.concat([comment])
                                 }
                                 return post
-                                //investigar aqui
+                            })
+            };
+
+        case DOWN_VOTE_COMMENT:
+            return {
+                ...state,
+                allPosts: state.allPosts
+                            .map(post => {
+                                if(post.id === comment.parentId) {
+                                    post.comments = post.comments
+                                                        .map(co => {
+                                                            if(co.id === comment.id) {
+                                                                co.voteScore = comment.voteScore
+                                                            }
+                                                            return co
+                                                        })
+                                }
+                                return post
+                            })
+
+            };
+
+        case UP_VOTE_COMMENT:
+            return {
+                ...state,
+                allPosts: state.allPosts
+                            .map(post => {
+                                if(post.id === comment.parentId) {
+                                    post.comments = post.comments
+                                                        .map(co => {
+                                                            if(co.id === comment.id) {
+                                                                co.voteScore = comment.voteScore
+                                                            }
+                                                            return co
+                                                        })
+                                }
+                                return post
                             })
             };
 
         case DELETE_COMMENT:
             return {
                 ...state,
-                deletedComment: action.comment
+                allPosts: state.allPosts.map(post => {
+                    if(post.id === comment.parentId) {
+                        post.comments = post.comments
+                                            .filter(co => co.id !== comment.id)
+                    }
+                    return post
+                })
             };
 
         default:

@@ -11,7 +11,8 @@ const defaultData = {
     author: 'thingtwo',
     category: 'laravel',
     voteScore: 3,
-    deleted: false
+    deleted: false,
+    comments: []
   },
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
@@ -21,7 +22,8 @@ const defaultData = {
     author: 'thingone',
     category: 'ember',
     voteScore: -1,
-    deleted: false
+    deleted: false,
+    comments: []
   },
   "6ni6ok3ym7mf1p33lnea": {
     id: '6ni6ok3ym7mf1p33lnea',
@@ -31,57 +33,8 @@ const defaultData = {
     author: 'thingone',
     category: 'laravel',
     voteScore: 2,
-    deleted: false
-  },
-  "6ni6ok3ym7mf1p33lneb": {
-    id: '6ni6ok3ym7mf1p33lneb',
-    timestamp: 1508512273,
-    title: 'Learn React in 10 minutes!',
-    body: 'It takes more than 10 minutes to learn technology.',
-    author: 'thingone',
-    category: 'react',
-    voteScore: 10,
-    deleted: false
-  },
-  "6ni6ok3ym7mf1p33lnec": {
-    id: '6ni6ok3ym7mf1p33lnec',
-    timestamp: 1510585873,
-    title: 'Angular my favorite!',
-    body: 'Angular rocks!.',
-    author: 'thingone',
-    category: 'angular',
-    voteScore: -5,
-    deleted: false
-  },
-  "6ni6ok3ym7mf1p33lned": {
-    id: '6ni6ok3ym7mf1p33lned',
-    timestamp: 1539529873,
-    title: 'YAY I am learning angular!',
-    body: 'Any tips?',
-    author: 'thingone',
-    category: 'angular',
-    voteScore: 2,
-    deleted: false
-  },
-  "6ni6ok3ym7mf1p33lnef": {
-    id: '6ni6ok3ym7mf1p33lnef',
-    timestamp: 1542121873,
-    title: 'Ember sucks!',
-    body: 'What else can I say?',
-    author: 'thingone',
-    category: 'ember',
-    voteScore: 15,
-    deleted: false
-  },
-  "6ni6ok3ym7mf1p33lnee": {
-    id: '6ni6ok3ym7mf1p33lnee',
-    timestamp: 1476375073,
-    title: 'Good Bye Ember',
-    body: 'Just kidding. It already gone.',
-    author: 'thingone',
-    category: 'ember',
-    voteScore: -10,
-    deleted: false
+    deleted: false,
+    comments: []
   }
 }
 
@@ -134,7 +87,8 @@ function add (token, post) {
       author: post.author,
       category: post.category,
       voteScore: 1,
-      deleted: false
+      deleted: false,
+      comments: []
     }
 
     res(posts[post.id])

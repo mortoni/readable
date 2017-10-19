@@ -61,7 +61,7 @@ const PostDetails = (props) => {
                     </div>
 
                     <div className="col-12 col-sm-6">
-                        <div className="col-12 item">
+                        <div className="col-12 item" onClick={ () => openModal('post', post, post.id) }>
                             <i className="fa fa-pencil" aria-hidden="true"></i>
                         </div>
                     </div>
@@ -79,9 +79,10 @@ const PostDetails = (props) => {
     )
 }
 
-function mapStateToProps({ load }) {
+function mapStateToProps({ load, posts }) {
     return {
         load: load,
+        posts: posts || [],
     };
 }
 
