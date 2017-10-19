@@ -11,20 +11,14 @@ import ModalComment from '../comment/modal/Modal'
 import PostDetails from '../post/details/Details'
 import Menu from '../menu/Menu'
 
-
-
+/**
+ * Main page that will contain all other components
+ */
 class Home extends Component {
     componentDidMount() {
         this.props.loadingCategory();
         this.props.getCategories();
         this.props.getPosts();
-    }
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            modal: false
-        }
     }
 
     categories = () => {
@@ -101,8 +95,8 @@ class Home extends Component {
 
 function mapStateToProps({ categories, posts, selected, modal }) {
     return {
-        categories: categories || [],
-        posts: posts || [],
+        categories,
+        posts,
         selected,
         modal,
     };

@@ -15,20 +15,5 @@
             color: $color-blue-bayoux;
             font-size: 10px;
         }
-
-        .item {
-            color: $color-blue-bayoux;
-            border: 1px solid $color-blue-bayoux;
-            border-radius: 20px;
-
-            &:active {
-                background: $color-blue-bayoux;
-                color: $color-oxford-blue;
-            }
-
-            &:hover {
-                cursor: pointer;
-            }
-        }
     }
 }

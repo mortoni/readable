@@ -1,5 +1,5 @@
 import { HashLoader } from 'react-spinners'
-import { images, getTime } from '../../utils/util'
+import { getTime } from '../../utils/util'
 import { connect } from 'react-redux'
 import { setSelected } from '../../actions'
 import React from 'react'
@@ -10,8 +10,13 @@ const isSelected = (post, selected) => {
     return post.id === selected.post.id
 }
 
-const getPost = (post, selected, setSelected) => {
-    const path = images.find(image => image.code === post.category)
+/**
+ * Component to instantiate a post.
+ */
+const getPost = (post, selected, setSelected, categories) => {
+    const category = categories
+                        .allCategories
+                        .find(category => category.path === post.category)
 
     let postClasses = classNames(
         'card',
@@ -25,7 +30,7 @@ const getPost = (post, selected, setSelected) => {
                 <div className="row">
 
                     <div className="col-3">
-                        { path && <img src={ path.icon }
+                        { <img src={ category.icon }
                              alt="Category Icon"
                              width="50"
                              className="img-fluid"/>
@@ -39,12 +44,16 @@ const getPost = (post, selected, setSelected) => {
                         <div className="row text-nowrap">
                             <span className="colorful">By &nbsp;</span>
                             <span> { post.author } &nbsp;</span>
-                            <span className="colorful d-none d-md-block"> { getTime(post.timestamp) } </span>
+                            <span className="colorful d-none d-md-block">
+                                { getTime(post.timestamp) }
+                            </span>
                         </div>
                     </div>
 
                     <div className="col-2">
-                        <span className="badge badge-secondary float-right">{ post.voteScore }</span>
+                        <span className="badge badge-secondary float-right">
+                            { post.voteScore }
+                        </span>
                     </div>
 
                 </div>
@@ -53,34 +62,40 @@ const getPost = (post, selected, setSelected) => {
     )
 }
 
+/**
+ * Container of post
+ */
 const Post = (props) => {
-    const { load, post, selected, setSelected } = props
+    const { load, post, selected, setSelected, categories } = props
 
     return (
         <div className="cp-post">
             { load[post.category] ?
                 <div className="d-flex h-100">
-                    <div className="justify-content-center align-self-center mx-auto d-block ">
+                    <div className="align-self-center mx-auto">
                         <HashLoader
                           color={'#02B3E4'}
                           loading={ load[post.category] }
                         />
                     </div>
                 </div>:
-                getPost(post, selected, setSelected)
+
+                getPost(post, selected, setSelected, categories)
             }
         </div>
     )
 }
 
 Post.propTypes = {
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  setSelected: PropTypes.func.isRequired
 };
 
-function mapStateToProps({ load, selected }) {
+function mapStateToProps({ load, selected, categories }) {
     return {
-        load: load,
-        selected: selected
+        load,
+        selected,
+        categories
     };
 }
 

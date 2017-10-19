@@ -2,7 +2,11 @@ import { setSelected, orderBy } from '../../actions'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import classNames from 'classnames'
+import PropTypes from 'prop-types'
 
+/**
+ * Menu item for when user select All Posts.
+ */
 const allPost = (props) => {
     const { selected, setSelected } = props
     let buttonClasses = classNames(
@@ -20,6 +24,9 @@ const allPost = (props) => {
     )
 }
 
+/**
+ * Menu toggle item for order post by recent or by score.
+ */
 const OrderPost = ({ order, orderBy, toggleOrder }) => {
     return (
         <div className="col">
@@ -41,8 +48,9 @@ const OrderPost = ({ order, orderBy, toggleOrder }) => {
     )
 }
 
-
-
+/**
+ * Post menu component.
+ */
 class Menu extends Component {
 
     constructor(props) {
@@ -75,11 +83,13 @@ class Menu extends Component {
 }
 
 Menu.propTypes = {
+    setSelected: PropTypes.func.isRequired,
+    orderBy: PropTypes.func.isRequired
 };
 
 function mapStateToProps({ selected }) {
     return {
-        selected
+        selected,
     };
 }
 

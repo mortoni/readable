@@ -1,11 +1,19 @@
 import { getTime } from '../../utils/util'
-import { upVoteComment, downVoteComment, deleteComment, openModal } from '../../actions'
+import { upVoteComment,
+         downVoteComment,
+         deleteComment,
+         openModal } from '../../actions'
 import { connect } from 'react-redux'
+import { Button } from '../template/Template'
+import PropTypes from 'prop-types'
 import React from 'react'
 
+/**
+ * Will instantiate every comment in comments of specific post
+ */
 const Comments = (props) => {
     const { upVoteComment, downVoteComment, deleteComment, openModal } = props
-    const post = props.posts.allPosts.find(post => post.id === props.post.id)
+    const post = props.posts.allPosts.find(post => post.id === props.post.id) //arumar isso aqui
 
     return (
         <div className="cp-comments">
@@ -14,7 +22,7 @@ const Comments = (props) => {
                     <div className="col">
                         <span className="badge badge-secondary float-right">{ comment.voteScore }</span>
 
-                        {comment.body}
+                        <span>{comment.body}</span>
 
                         <div className="col text-uppercase author">
                             <span>commented by { comment.author } { getTime(comment.timestamp) }</span>
@@ -22,28 +30,20 @@ const Comments = (props) => {
                     </div>
 
                     <div className="row mt-3">
-                        <div className="col">
-                            <div className="col-12 item" onClick={ () => upVoteComment(comment.id) }>
-                                <i className="fa fa-thumbs-up" aria-hidden="true"></i>
-                            </div>
+                        <div className="col" onClick={ () => upVoteComment(comment.id) }>
+                            <Button icon='fa fa-thumbs-up'/>
                         </div>
 
-                        <div className="col">
-                            <div className="col-12 item" onClick={ () => downVoteComment(comment.id) }>
-                                <i className="fa fa-thumbs-down" aria-hidden="true"></i>
-                            </div>
+                        <div className="col" onClick={ () => downVoteComment(comment.id) }>
+                            <Button icon='fa fa-thumbs-down'/>
                         </div>
 
-                        <div className="col">
-                            <div className="col-12 item" onClick={ () => openModal('comment', comment, comment.parentId) }>
-                                <i className="fa fa-pencil" aria-hidden="true"></i>
-                            </div>
+                        <div className="col" onClick={ () => openModal('comment', comment, comment.parentId) }>
+                            <Button icon='fa fa-pencil'/>
                         </div>
 
-                        <div className="col">
-                            <div className="col-12 item" onClick={ () => deleteComment(comment.id) }>
-                                <i className="fa fa-trash-o" aria-hidden="true"></i>
-                            </div>
+                        <div className="col"  onClick={ () => deleteComment(comment.id) }>
+                            <Button icon='fa fa-trash-o'/>
                         </div>
                     </div>
                 </div>
@@ -52,9 +52,17 @@ const Comments = (props) => {
     )
 }
 
+Comments.propTypes = {
+    post: PropTypes.object.isRequired,
+    upVoteComment: PropTypes.func.isRequired,
+    downVoteComment: PropTypes.func.isRequired,
+    deleteComment: PropTypes.func.isRequired,
+    openModal: PropTypes.func.isRequired
+};
+
 function mapStateToProps({ posts }) {
     return {
-        posts: posts || [],
+        posts,
     };
 }
 

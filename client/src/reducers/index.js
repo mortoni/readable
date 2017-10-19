@@ -95,7 +95,7 @@ function load(state = loadState, action) {
         case CATEGORY_LOADED:
             return {
                 ...state,
-                [category]: status
+                [category]: status //refactor change for isLoad
             };
 
         default:
@@ -153,6 +153,7 @@ function posts(state = {}, action) {
                                 }
                                 return post
                             })
+                            .sort((a, b) => a.voteScore < b.voteScore)
             };
         case DOWN_VOTE_POST:
             return {
@@ -164,6 +165,7 @@ function posts(state = {}, action) {
                                 }
                                 return post
                             })
+                            .sort((a, b) => a.voteScore < b.voteScore)
             };
 
         case ADD_POST:
@@ -206,6 +208,7 @@ function posts(state = {}, action) {
                                                             }
                                                             return co
                                                         })
+                                                        .sort((a, b) => a.voteScore < b.voteScore)
                                 }
                                 return post
                             })
@@ -225,6 +228,7 @@ function posts(state = {}, action) {
                                                             }
                                                             return co
                                                         })
+                                                        .sort((a, b) => a.voteScore < b.voteScore)
                                 }
                                 return post
                             })

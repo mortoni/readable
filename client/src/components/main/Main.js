@@ -5,6 +5,9 @@ import React from 'react'
 
 import '../../styles/Application.css'
 
+/**
+ * Component routing and templating the application
+ */
 const Main = () => {
     return (
         <section className="section">
@@ -17,7 +20,7 @@ const Main = () => {
                     </div>
                 )}
             />
-            
+
         </section>
     );
 };

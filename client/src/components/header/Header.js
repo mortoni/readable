@@ -1,6 +1,9 @@
 import React from 'react'
 import logo from '../../assets/udacity.svg'
 
+/**
+ * Header Component
+ */
 const Header = () => {
     return (
         <div className="cp-header">

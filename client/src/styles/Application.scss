@@ -1,17 +1,19 @@
 @import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 @import '../../node_modules/font-awesome/css/font-awesome.css';
 
+// Components
 @import '_shared.scss';
+@import '_modal.scss';
 @import 'components/header/_header.scss';
-@import 'components/main/_main.scss';
 @import 'components/home/_home.scss';
 @import 'components/category/_category.scss';
 @import 'components/menu/_menu.scss';
 @import 'components/post/_post.scss';
 @import 'components/post/details/_details.scss';
-@import 'components/post/modal/_modal.scss';
 @import 'components/comment/_comment.scss';
-@import 'components/comment/modal/_modal.scss';
+
+// Template
+@import 'components/template/_template.scss';
 
 body {
     margin: 0;

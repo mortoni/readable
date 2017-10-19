@@ -4,20 +4,33 @@ import { deletePost,
          upVotePost,
          downVotePost,
          openModal } from '../../../actions'
-import { images, getTime } from '../../../utils/util'
+import { getTime } from '../../../utils/util'
+import { Button } from '../../template/Template'
 import Comments from '../../comment/Comment'
 import React from 'react'
+import PropTypes from 'prop-types'
 
+/**
+ * Details of select post component.
+ */
 const PostDetails = (props) => {
-    const { post, deletePost, upVotePost, downVotePost, openModal } = props
-    const path = images.find(image => image.code === post.category)
+    const { post,
+            deletePost,
+            upVotePost,
+            downVotePost,
+            openModal,
+            categories } = props
+
+    const category = categories
+                        .allCategories
+                        .find(category => category.path === post.category)
 
     return (
         <div className="row cp-post-details">
             <div className="col-8">
                 <div className="details">
                     <div className="col-12">
-                        <img src={ path.icon }
+                        <img src={ category.icon }
                              alt="Category Icon"
                              className="img-fluid shadow"
                              width="50"/>
@@ -32,42 +45,41 @@ const PostDetails = (props) => {
                     </div>
 
                     <div className="col-12">
-                        <span className="text-uppercase author">Post created by  { post.author + " " + getTime(post.timestamp)} </span>
+                        <span className="text-uppercase author">
+                            Post created by  { post.author + " " + getTime(post.timestamp)}
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <div className="col-4 menu">
+            <div className="col-4 menu text-center">
 
                 <div className="row">
-                    <div className="col-12 col-sm-6" onClick={() => upVotePost(post.id) }>
-                        <div className="col-12 item">
-                            <i className="fa fa-thumbs-up" aria-hidden="true"></i>
-                        </div>
+                    <div className="col col-sm-6 mb-3"
+                        onClick={() => upVotePost(post.id) }>
+                        <Button icon='fa fa-thumbs-up' />
                     </div>
 
-                    <div className="col-12 col-sm-6" onClick={() => downVotePost(post.id) }>
-                        <div className="col-12 item">
-                            <i className="fa fa-thumbs-down" aria-hidden="true"></i>
-                        </div>
+                    <div className="col-12 col-sm-6 mb-3"
+                        onClick={() => downVotePost(post.id) }>
+                        <Button icon='fa fa-thumbs-down' />
                     </div>
                 </div>
 
                 <div className="row">
-                    <div className="col-12 col-sm-6" onClick={() => deletePost(post.id) }>
-                        <div className="col-12 item">
-                            <i className="fa fa-trash-o" aria-hidden="true"></i>
-                        </div>
+                    <div className="col-12 col-sm-6 mb-3"
+                        onClick={() => deletePost(post.id) }>
+                        <Button icon='fa fa-trash-o' />
                     </div>
 
-                    <div className="col-12 col-sm-6">
-                        <div className="col-12 item" onClick={ () => openModal('post', post, post.id) }>
-                            <i className="fa fa-pencil" aria-hidden="true"></i>
-                        </div>
+                    <div className="col-12 col-sm-6 mb-3"
+                        onClick={ () => openModal('post', post, post.id) }>
+                        <Button icon='fa fa-pencil' />
                     </div>
                 </div>
 
-                <div className="col item" onClick={ () => openModal('comment', {}, post.id) }>
+                <div className="col item"
+                    onClick={ () => openModal('comment', {}, post.id) }>
                     <i className="fa fa-comment-o" aria-hidden="true"></i>
                 </div>
             </div>
@@ -79,10 +91,20 @@ const PostDetails = (props) => {
     )
 }
 
-function mapStateToProps({ load, posts }) {
+PostDetails.propTypes = {
+    post: PropTypes.object.isRequired,
+    upVotePost: PropTypes.func.isRequired,
+    downVotePost: PropTypes.func.isRequired,
+    openModal: PropTypes.func.isRequired,
+    deletePost: PropTypes.func.isRequired,
+    setSelected: PropTypes.func
+};
+
+function mapStateToProps({ load, posts, categories }) {
     return {
-        load: load,
-        posts: posts || [],
+        load,
+        posts,
+        categories,
     };
 }
 

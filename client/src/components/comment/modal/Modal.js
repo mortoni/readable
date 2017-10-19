@@ -3,8 +3,12 @@ import { closeModal, addComment, editComment } from '../../../actions'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import uuid from 'uuid'
 
+/**
+ * Redux form for create / edit comment
+ */
 class CommentForm extends Component {
 
     componentWillMount() {
@@ -55,6 +59,9 @@ CommentForm = reduxForm({
   form: 'comment'
 })(CommentForm)
 
+/**
+ * Modal for create / edit comment
+ */
 const ModalComment = (props) => {
     const { modal, closeModal, addComment, editComment } = props
 
@@ -96,6 +103,13 @@ const ModalComment = (props) => {
         </div>
 
     )
+}
+
+ModalComment.propTypes = {
+    modal: PropTypes.object.isRequired,
+    addComment: PropTypes.func.isRequired,
+    closeModal: PropTypes.func.isRequired,
+    editComment: PropTypes.func.isRequired
 }
 
 function mapStateToProps({ modal }) {

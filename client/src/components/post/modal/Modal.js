@@ -3,16 +3,19 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { addPost, closeModal, editPost } from '../../../actions'
 import { connect } from 'react-redux'
-import { images } from '../../../utils/util'
 import classNames from 'classnames'
+import PropTypes from 'prop-types'
 import uuid from 'uuid'
 
+/**
+ * Redux form component for create / edit Post.
+ */
 class PostForm extends Component {
 
-    isSelected = (image) => {
+    isSelected = (category) => {
          return classNames(
             'card',
-            { 'selected': image.code === this.props.selected }
+            { 'selected': category.path === this.props.selected }
         );
     }
 
@@ -24,7 +27,11 @@ class PostForm extends Component {
     }
 
     render() {
-        const { handleSubmit, setSelected, closeModal, target } = this.props
+        const { handleSubmit,
+                setSelected,
+                closeModal,
+                target,
+                categories } = this.props
 
         const button = target.id ? 'Edit' : 'Create'
 
@@ -59,12 +66,13 @@ class PostForm extends Component {
                 <div className="form-group">
                     <label >Category</label>
                     <div className="row post-form mb-5">
-                        { images.map(image => (
-                            <div key={ image.code } className="col" onClick={ () => setSelected(image.code)}>
-                                <div className={ this.isSelected(image) }>
+                        { categories.allCategories.map(category => (
+                            <div key={ category.path } className="col"
+                                onClick={ () => setSelected(category.path)}>
+                                <div className={ this.isSelected(category) }>
                                     <div className="d-flex h-100">
-                                        <div className="justify-content-center align-self-center mx-auto d-block">
-                                            <img src={ image.icon }
+                                        <div className="align-self-center mx-auto">
+                                            <img src={ category.icon }
                                                  alt="Category Figure"
                                                  className="img-fluid"
                                                  width="50"/>
@@ -83,7 +91,8 @@ class PostForm extends Component {
                     </div>
 
                     <div className="float-left">
-                        <button type="button" onClick={ () => closeModal('post') }>Cancel</button>
+                        <button type="button"
+                            onClick={ () => closeModal('post') }>Cancel</button>
                     </div>
                 </div>
 
@@ -92,10 +101,22 @@ class PostForm extends Component {
     }
 }
 
+PostForm.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    selected: PropTypes.string.isRequired,
+    setSelected: PropTypes.func.isRequired,
+    closeModal: PropTypes.func.isRequired,
+    target: PropTypes.object.isRequired,
+    categories: PropTypes.object.isRequired
+}
+
 PostForm = reduxForm({
   form: 'createPost'
 })(PostForm)
 
+/**
+ * Modal component for create / edit Post.
+ */
 class ModalPost extends Component {
     constructor(props) {
         super(props);
@@ -151,7 +172,7 @@ class ModalPost extends Component {
     }
 
     render() {
-        const { modal, closeModal } = this.props
+        const { modal, closeModal, categories } = this.props
         const { selected } = this.state
 
         const title = modal.target.id ? 'Edit Post' : 'Create Post'
@@ -169,19 +190,26 @@ class ModalPost extends Component {
                             selected={ selected }
                             setSelected={ this.setSelected }
                             closeModal={ closeModal }
-                            target={ modal.target }/>
+                            target={ modal.target }
+                            categories={ categories }/>
                     </ModalBody>
-
                 </Modal>
             </div>
-
         )
     }
 }
 
-function mapStateToProps({ modal }) {
+ModalPost.propTypes = {
+    modal: PropTypes.object.isRequired,
+    addPost: PropTypes.func.isRequired,
+    closeModal: PropTypes.func.isRequired,
+    editPost: PropTypes.func.isRequired
+}
+
+function mapStateToProps({ modal, categories }) {
     return {
         modal,
+        categories
     };
 }
 

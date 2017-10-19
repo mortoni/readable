@@ -1,34 +1,45 @@
 const clone = require('clone')
 const config = require('./config')
 const express = require('express')
+var fs = require('fs');
 
 let db = {}
+
+const BASE64 = 'data:image/png;base64,'
+
+// function to encode file data to base64 encoded string
+function base64_encode(file) {
+    // read binary data
+    var bitmap = fs.readFileSync(file);
+    // convert binary data to base64 encoded string
+    return new Buffer(bitmap, 'binary').toString('base64');
+}
 
 const defaultData = {
   categories: [
       {
         name: 'Laravel',
         path: 'laravel',
-        image: '../assets/laravel.png',
-        icon: '../assets/laravel_icon.png'
+        image: BASE64 + base64_encode('images/laravel.png'),
+        icon: BASE64 + base64_encode('images/laravel_icon.png')
       },
       {
         name: 'Ember',
         path: 'ember',
-        image: '../assets/ember.png',
-        icon: '../assets/ember_icon.png'
+        image: BASE64 + base64_encode('images/ember.png'),
+        icon: BASE64 + base64_encode('images/ember_icon.png')
       },
       {
         name: 'React',
         path: 'react',
-        image: '../assets/react.svg',
-        icon: '../assets/react_icon.png'
+        image: BASE64 + base64_encode('images/react.png'),
+        icon: BASE64 + base64_encode('images/react_icon.png')
       },
       {
         name: 'Angular',
         path: 'angular',
-        image: '../assets/angular.svg',
-        icon: '../assets/angular_icon.png'
+        image: BASE64 + base64_encode('images/angular.png'),
+        icon: BASE64 + base64_encode('images/angular_icon.png')
       }
   ]
 }
