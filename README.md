@@ -11,7 +11,7 @@ To get started developing right away:
 * Install and start the API server
     - `cd server`
     - `npm install`
-    - `node server`
+    - `npm start`
 * In another terminal window, use Create React App to scaffold out the front-end
     - `cd client`
     - `npm install`
