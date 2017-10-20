@@ -7,6 +7,18 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import uuid from 'uuid'
 
+const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
+    <div>
+        <label>{label}</label>
+        <div>
+            <input {...input} type={type}/>
+                {touched &&
+                    ((error && <span className="text-uppercase erroInput">{error}</span>) ||
+                    (warning && <span>{warning}</span>))}
+        </div>
+    </div>
+)
+
 /**
  * Redux form component for create / edit Post.
  */
@@ -26,6 +38,8 @@ class PostForm extends Component {
         }
     }
 
+    required = value => value ? undefined : 'Required'
+
     render() {
         const { handleSubmit,
                 setSelected,
@@ -39,28 +53,29 @@ class PostForm extends Component {
             <form onSubmit={ handleSubmit }>
                 <div className="row">
                     <div className="form-group col-12 col-sm-6">
-                        <label htmlFor="title">Title</label>
                         <Field
                             type="text"
                             name="title"
-                            component="input"/>
+                            component={renderField}
+                            label="Title"/>
                     </div>
 
                     <div className="form-group col-12 col-sm-6">
-                        <label htmlFor="author">Author</label>
                         <Field
                             type="text"
                             name="author"
-                            component="input"/>
+                            component={renderField}
+                            label="Author"/>
                     </div>
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="body">Body</label>
                     <Field
                         type="text"
                         name="body"
-                        component="textarea"/>
+                        component={renderField}
+                        label="Body"/>
+
                 </div>
 
                 <div className="form-group">
@@ -110,8 +125,35 @@ PostForm.propTypes = {
     categories: PropTypes.object.isRequired
 }
 
+//Post side validation
+function validate(values) {
+    const errors = {};
+
+    if (!values.title || values.title.trim() === '') {
+        errors.title = 'Enter a Title';
+    }
+
+    if(values.title && values.title.length > 25) {
+        errors.title = 'Too big, max 25 characters';
+    }
+
+    if (!values.author || values.author.trim() === '') {
+        errors.author = 'Enter an Authir';
+    }
+
+    if(values.author && values.author.length > 10) {
+        errors.author = 'Too big, max 10 characters';
+    }
+
+    if(values.body && values.body.length > 50) {
+        errors.body = 'Too big, max 50 characters';
+    }
+    return errors;
+}
+
 PostForm = reduxForm({
-  form: 'createPost'
+  form: 'createPost',
+  validate
 })(PostForm)
 
 /**

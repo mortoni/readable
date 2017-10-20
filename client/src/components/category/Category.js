@@ -73,7 +73,9 @@ class Category extends Component {
 }
 
 Category.propTypes = {
-    category: PropTypes.object.isRequired
+    category: PropTypes.object.isRequired,
+    categoryLoaded: PropTypes.func.isRequired,
+    setSelected: PropTypes.func.isRequired,
 };
 
 function mapStateToProps({ load, selected, categories }) {

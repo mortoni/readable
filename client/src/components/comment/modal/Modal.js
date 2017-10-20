@@ -6,6 +6,18 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import uuid from 'uuid'
 
+const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
+    <div>
+        <label>{label}</label>
+        <div>
+            <input {...input} type={type}/>
+                {touched &&
+                    ((error && <span className="text-uppercase erroInput">{error}</span>) ||
+                    (warning && <span>{warning}</span>))}
+        </div>
+    </div>
+)
+
 /**
  * Redux form for create / edit comment
  */
@@ -25,19 +37,19 @@ class CommentForm extends Component {
         return (
             <form onSubmit={ handleSubmit }>
                 <div className="form-group">
-                    <label htmlFor="body">Body</label>
                     <Field
                         type="text"
                         name="body"
-                        component="textarea"/>
+                        component={renderField}
+                        label="Body"/>
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="author">Author</label>
                     <Field
                         type="text"
                         name="author"
-                        component="input"/>
+                        component={renderField}
+                        label="Author"/>
                 </div>
 
                 <div className="col">
@@ -55,8 +67,32 @@ class CommentForm extends Component {
     }
 }
 
+//Post side validation
+function validate(values) {
+    const errors = {};
+
+    if (!values.body || values.body.trim() === '') {
+        errors.body = 'Enter a Body message';
+    }
+
+    if(values.body && values.body.length > 50) {
+        errors.body = 'Too big, max 50 characters';
+    }
+
+    if (!values.author || values.author.trim() === '') {
+        errors.author = 'Enter an Author';
+    }
+
+    if(values.author && values.author.length > 10) {
+        errors.author = 'Too big, max 10 characters';
+    }
+
+    return errors;
+}
+
 CommentForm = reduxForm({
-  form: 'comment'
+  form: 'comment',
+  validate
 })(CommentForm)
 
 /**

@@ -18,6 +18,10 @@
     cursor: pointer;
     box-shadow: 0 0px 0px #f95c3c, 0 0px 0px #f95c3c; }
 
+.erroInput {
+  color: #f95c3c;
+  font-size: 10px; }
+
 .modal-body input {
   border: 1px solid #4f687d;
   border-radius: 0.25rem;
