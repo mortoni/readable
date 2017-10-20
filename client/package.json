@@ -6,6 +6,7 @@
     "bootstrap": "^4.0.0-beta",
     "classnames": "^2.2.5",
     "compass-mixins": "^0.12.10",
+    "emotion": "^8.0.8",
     "font-awesome": "^4.7.0",
     "moment": "^2.19.1",
     "node-sass-chokidar": "0.0.3",
@@ -32,12 +33,17 @@
     "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile=raf/polyfill",
     "eject": "react-scripts eject"
   },
-    "jest": {
-    "setupFiles": ["./test/jestsetup.js"],
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+  "jest": {
+    "setupFiles": [
+      "./test/jestsetup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   },
   "devDependencies": {
     "enzyme": "^3.1.0",
-    "enzyme-adapter-react-16": "^1.0.2"
+    "enzyme-adapter-react-16": "^1.0.2",
+    "npm-run-all": "^4.1.1"
   }
 }
