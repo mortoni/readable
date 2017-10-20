@@ -1,30 +1,12 @@
 const api = "http://localhost:3001";
 
-// let token = localStorage.token;
-//
-// if (!token) {
-//     token = localStorage.token = Math.random().toString(36).substr(-8);
-// }
-
-
-
-/**
- * Since tests run without the dom (and thus without window.localStorage)
- *  create a storage placeholder only when tests are running to polyfill missing global
- */
 let token;
-let storage;
 
 if (process.env.NODE_ENV === 'test') {
   token = null;
-  storage = { token:  null };
 } else {
   token = localStorage.token;
-  storage = localStorage;
 }
-
-
-
 
 const headers = {
     Accept: "application/json",
