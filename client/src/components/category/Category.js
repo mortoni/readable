@@ -41,8 +41,13 @@ class Category extends Component {
         return this.props.category.path === this.props.selected.category.path
     }
 
+    goTo() {
+        const category = this.props.category.path
+        this.props.history.push(`/${category}`)
+    }
+
     render() {
-        const { setSelected, category, load } = this.props
+        const { setSelected, category, load, history } = this.props
         let cardClasses = classNames(
             'card',
             { 'selected': this.isSelected() }
@@ -53,7 +58,9 @@ class Category extends Component {
                 <div className={ cardClasses }
                      onClick={ () => {
                          setSelected('category', category)
-                         setSelected('post', {}) }
+                         setSelected('post', {})
+                         this.goTo()
+                        }
                      }>
                     { load[category.path] ?
                         <div className="d-flex h-100">
@@ -64,7 +71,7 @@ class Category extends Component {
                                 />
                             </div>
                         </div> :
-                        GetImage(category)
+                        GetImage(category, history)
                     }
                 </div>
             </div>

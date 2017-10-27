@@ -1,9 +1,8 @@
 import { connect } from 'react-redux'
 import { deletePost,
          setSelected,
-         upVotePost,
-         downVotePost,
-         openModal } from '../../../actions'
+         openModal,
+         getCategories } from '../../../actions'
 import { getTime } from '../../../utils/util'
 import { Button } from '../../template/Template'
 import Comments from '../../comment/Comment'
@@ -16,8 +15,6 @@ import PropTypes from 'prop-types'
 const PostDetails = (props) => {
     const { post,
             deletePost,
-            upVotePost,
-            downVotePost,
             openModal,
             categories } = props
 
@@ -55,18 +52,6 @@ const PostDetails = (props) => {
             <div className="col-4 menu text-center">
 
                 <div className="row">
-                    <div className="col col-sm-6 mb-3"
-                        onClick={() => upVotePost(post.id) }>
-                        <Button icon='fa fa-thumbs-up' />
-                    </div>
-
-                    <div className="col-12 col-sm-6 mb-3"
-                        onClick={() => downVotePost(post.id) }>
-                        <Button icon='fa fa-thumbs-down' />
-                    </div>
-                </div>
-
-                <div className="row">
                     <div className="col-12 col-sm-6 mb-3"
                         onClick={() => deletePost(post.id) }>
                         <Button icon='fa fa-trash-o' />
@@ -92,9 +77,6 @@ const PostDetails = (props) => {
 }
 
 PostDetails.propTypes = {
-    post: PropTypes.object.isRequired,
-    upVotePost: PropTypes.func.isRequired,
-    downVotePost: PropTypes.func.isRequired,
     openModal: PropTypes.func.isRequired,
     deletePost: PropTypes.func.isRequired,
     setSelected: PropTypes.func
@@ -114,9 +96,8 @@ function mapDispatchToProps(dispatch) {
             dispatch(deletePost(id))
             dispatch(setSelected('post', {}))
         },
-        upVotePost: (postID) => dispatch(upVotePost(postID)),
-        downVotePost: (postID) => dispatch(downVotePost(postID)),
         openModal: (modal, target, parentId) => dispatch(openModal(modal, target, parentId)),
+        getCategories: () => dispatch(getCategories()),
     };
 }
 

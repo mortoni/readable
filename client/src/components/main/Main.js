@@ -1,28 +1,20 @@
-import { Route } from 'react-router-dom'
-import Header from '../header/Header'
+import { Switch, Route, Router } from 'react-router-dom'
 import Home from '../home/Home'
 import React from 'react'
+import createHistory from 'history/createBrowserHistory'
 
 import '../../styles/Application.css'
 
 /**
- * Component routing and templating the application
+ * Router
  */
-const Main = () => {
-    return (
-        <section className="section">
-            <Header />
-
-            <Route exact path="/"
-                render={() => (
-                    <div className="container">
-                        <Home/>
-                    </div>
-                )}
-            />
-
-        </section>
-    );
-};
+const history = createHistory();
+const Main = () => (
+    <Router history={history}>
+        <Switch>
+            <Route path="/" component={ Home } />
+        </Switch>
+    </Router>
+);
 
 export default Main;

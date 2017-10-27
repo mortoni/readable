@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
  * Menu item for when user select All Posts.
  */
 const allPost = (props) => {
-    const { selected, setSelected } = props
+    const { selected, setSelected, history } = props
     let buttonClasses = classNames(
         'button',
         { 'selected': !selected.category.name }
@@ -17,7 +17,11 @@ const allPost = (props) => {
     return (
         <div className="col">
             <div className={ buttonClasses }
-                 onClick={ () => setSelected('category', { path: '' }) }>
+                 onClick={ () => {
+                     setSelected('category', { path: '' })
+                     history.push('/')
+                    }
+                }>
                  All posts
             </div>
         </div>

@@ -171,7 +171,6 @@ function posts(state = {}, action) {
         case ADD_POST:
             return {
                 ...state,
-                addedPost: action.newPost,
                 allPosts: state.allPosts.concat([action.newPost])
             }
 

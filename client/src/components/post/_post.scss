@@ -15,7 +15,12 @@
         margin-top: 10px;
         color: $color-white;
         background: $color-oxford-blue;
-        height: 65px;
+        height: 75px;
+
+        .comment {
+            color: #4f687d;
+            font-size: 12px;
+        }
 
         .colorful {
             color: $color-blue-bayoux;

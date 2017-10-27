@@ -155,7 +155,10 @@
   margin-top: 10px;
   color: #FFFFFF;
   background: #2e3d49;
-  height: 65px; }
+  height: 75px; }
+  .cp-post .card .comment {
+    color: #4f687d;
+    font-size: 12px; }
   .cp-post .card .colorful {
     color: #4f687d; }
   .cp-post .card:hover {
